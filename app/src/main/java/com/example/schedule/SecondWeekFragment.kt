@@ -5,15 +5,38 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.schedule.databinding.FragmentFirstWeekBinding
+import com.example.schedule.databinding.FragmentSecondWeekBinding
 
 class SecondWeekFragment : Fragment() {
-
+    lateinit var binding: FragmentSecondWeekBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second_week, container, false)
+        binding = FragmentSecondWeekBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val lessonList: RecyclerView = binding.lessonWeek2List
+        val lessons = arrayListOf<Lesson>()
+
+        lessons.add(Lesson(3, "Фронтенд", "18:20", "21:25", "132", "Практика", "Пятница", "Первая", "Не помню"))
+        lessons.add(Lesson(1, "Технологии прикладного программирования", "9:40", "16:30", "132", "Практика", "Суббота", "Первая", "Веригин Н.В."))
+        lessons.add(Lesson(2, "Базы данных", "16:45", "17:15", "132б", "Лекция", "Суббота", "Первая", "Барабанщиков"))
+        lessons.add(Lesson(4, "Фронтенд", "18:20", "21:25", "132", "Практика", "Пятница", "Первая", "Не помню"))
+        lessons.add(Lesson(5, "Технологии прикладного программирования", "9:40", "16:30", "132", "Практика", "Суббота", "Первая", "Веригин Н.В."))
+        lessons.add(Lesson(6, "Базы данных", "16:45", "17:15", "132б", "Лекция", "Суббота", "Первая", "Барабанщиков"))
+        lessons.add(Lesson(7, "Фронтенд", "18:20", "21:25", "132", "Практика", "Пятница", "Первая", "Не помню"))
+        lessons.add(Lesson(8, "Технологии прикладного программирования", "9:40", "16:30", "132", "Практика", "Суббота", "Первая", "Веригин Н.В."))
+        lessons.add(Lesson(9, "Базы данных", "16:45", "17:15", "132б", "Лекция", "Суббота", "Первая", "Барабанщиков"))
+
+
+        lessonList.layoutManager = LinearLayoutManager(lessonList.context)
+        lessonList.adapter = LessonsAdapter(lessons, lessonList.context)
     }
 
     companion object {
