@@ -2,22 +2,40 @@ package com.example.schedule
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputBinding
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.schedule.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val bChangeWeek: Button = binding.changeWeekButton
 
-        val lessonList: RecyclerView = findViewById(R.id.lessonsList)
-        val lessons = arrayListOf<Lesson>()
+        binding.changeWeekButton.setOnClickListener {
+            if (bChangeWeek.text == "Первая неделя") {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.schedule, SecondWeekFragment.newInstance())
+                    .commit()
+                bChangeWeek.text = "Вторая неделя"
+            }
+            else {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.schedule, FirstWeekFragment.newInstance())
+                    .commit()
+                bChangeWeek.text = "Первая неделя"
+            }
+        }
 
-        lessons.add(Lesson(3, "Фронтенд", "18:20", "21:25", "132", "Практика", "Пятница", "Первая", "Не помню"))
-        lessons.add(Lesson(1, "Технологии прикладного программирования", "9:40", "16:30", "132", "Практика", "Суббота", "Первая", "Веригин Н.В."))
-        lessons.add(Lesson(2, "Базы данных", "16:45", "17:15", "132б", "Лекция", "Суббота", "Первая", "Барабанщиков"))
-
-        lessonList.layoutManager = LinearLayoutManager(this)
-        lessonList.adapter = LessonsAdapter(lessons, this)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.schedule, FirstWeekFragment.newInstance())
+            .commit()
     }
 }
