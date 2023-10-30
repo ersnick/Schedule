@@ -13,6 +13,14 @@
         android:theme="@style/Theme.Schedule"
         tools:targetApi="31">
         <activity
+            android:name=".addLessonActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/addLesson_title">
+                <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

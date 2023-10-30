@@ -1,5 +1,6 @@
 package com.example.schedule
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputBinding
@@ -7,6 +8,7 @@ import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schedule.databinding.ActivityMainBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -15,6 +17,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val bChangeWeek: Button = binding.changeWeekButton
+        val addLessonButton: FloatingActionButton = findViewById(R.id.addLessonButton)
+
+        addLessonButton.setOnClickListener {
+            val intent = Intent(this, addLessonActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.changeWeekButton.setOnClickListener {
             if (bChangeWeek.text == "Первая неделя") {

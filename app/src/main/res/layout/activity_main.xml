@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:theme="@android:style/ThemeOverlay.Material.Dark">
+    tools:context=".MainActivity">
 
     <FrameLayout
         android:id="@+id/schedule"
@@ -30,7 +29,6 @@
         android:layout_marginStart="40dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:src="@android:drawable/ic_input_add"
         android:text="Первая неделя"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
