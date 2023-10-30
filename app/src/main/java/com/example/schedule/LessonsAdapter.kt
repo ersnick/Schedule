@@ -27,8 +27,8 @@ class LessonsAdapter(var lessons: List<Lesson>, var context: Context):
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.lessonClassroom.text = lessons[position].classrom
-        holder.lessonTeacherName.text = lessons[position].teachername
+        holder.lessonClassroom.text = lessons[position].classroom
+        holder.lessonTeacherName.text = lessons[position].teacherName
         holder.lessonDay.text = lessons[position].day
         holder.lessonName.text = lessons[position].lessonName
         holder.lessonTime.text = lessons[position].timeStart + " - " + lessons[position].timeEnd

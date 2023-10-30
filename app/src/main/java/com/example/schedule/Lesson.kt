@@ -1,5 +1,5 @@
 package com.example.schedule
 
-public class Lesson(val id: Int, val lessonName: String, val timeStart: String, val timeEnd: String, val classrom: String,
-                    val lessonType: String, val day: String, val week: String, val teachername: String) {
+public class Lesson(val lessonName: String, val teacherName: String, val classroom: String,
+                    val lessonType: String, val week: String, val day: String, val timeStart: String, val timeEnd: String) {
 }

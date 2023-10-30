@@ -25,9 +25,9 @@ class FirstWeekFragment : Fragment() {
         val lessonList: RecyclerView = binding.lessonWeek1List
         val lessons = arrayListOf<Lesson>()
 
-        lessons.add(Lesson(3, "Фронтенд", "18:20", "21:25", "132", "Практика", "Пятница", "Первая", "Не помню"))
-        lessons.add(Lesson(1, "Технологии прикладного программирования", "9:40", "16:30", "132", "Практика", "Суббота", "Первая", "Веригин Н.В."))
-        lessons.add(Lesson(2, "Базы данных", "16:45", "17:15", "132б", "Лекция", "Суббота", "Первая", "Барабанщиков"))
+        lessons.add(Lesson("Фронтенд", "18:20", "21:25", "132", "Практика", "Пятница", "Первая", "Не помню"))
+        lessons.add(Lesson("Технологии прикладного программирования", "9:40", "16:30", "132", "Практика", "Суббота", "Первая", "Веригин Н.В."))
+        lessons.add(Lesson("Базы данных", "16:45", "17:15", "132б", "Лекция", "Суббота", "Первая", "Барабанщиков"))
 
         lessonList.layoutManager = LinearLayoutManager(lessonList.context)
         lessonList.adapter = LessonsAdapter(lessons, lessonList.context)

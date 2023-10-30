@@ -9,9 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="90dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,37 +30,82 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:ems="10"
-            android:inputType="text"
-            android:text="Преподаватель" />
+            android:hint="Преподаватель"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/classroom"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:ems="10"
-            android:inputType="text"
-            android:text="Name" />
+            android:hint="Аудитория"
+            android:inputType="text" />
 
         <Spinner
             android:id="@+id/type_of_lesson"
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="60dp"
+            android:entries="@array/typeOfLesson"
+            android:popupBackground="?attr/popupMenuBackground" />
+
+        <TextView
+            android:id="@+id/help_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Выберите тип занятия"
+            android:textSize="10sp" />
+
+        <Spinner
+            android:id="@+id/number_of_week"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:entries="@array/numberOfWeek"
+            android:popupBackground="?attr/popupMenuBackground" />
+
+        <TextView
+            android:id="@+id/help_week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Выберите на какой неделе будет проводиться занятие"
+            android:textSize="10sp" />
+
+        <Spinner
+            android:id="@+id/days"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:entries="@array/days"
+            android:popupBackground="?attr/popupMenuBackground" />
+
+        <TextView
+            android:id="@+id/help_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Выберите в какой день будет проводиться занятие"
+            android:textSize="10sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
             android:orientation="horizontal">
 
-            <TwoLineListItem
-                android:icon = "@android:drawable/ic_menu_week"
+            <ImageView
+                android:id="@+id/icon_view"
                 android:layout_width="40dp"
-                android:layout_height="40dp" />
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_clock_foreground" />
 
             <Button
                 android:id="@+id/time_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
+                android:backgroundTint="#4F378B"
+                android:textColor="#FFFFFF"
                 android:text="Начало" />
 
             <Button
@@ -68,13 +113,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="#4F378B"
+                android:textColor="#FFFFFF"
                 android:text="Конец" />
+
         </LinearLayout>
 
-        <Spinner
-            android:id="@+id/number_of_week"
-            android:layout_width="match_parent"
-            android:layout_height="60dp" />
+
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_done"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#4F378B"
+        android:clickable="true"
+        android:insetRight="0dp"
+        android:text="Готово"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:icon="@drawable/ic_check_mark_foreground"
+        app:iconGravity="textEnd"
+        app:iconPadding="8dp"
+        app:iconSize="28dp"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
