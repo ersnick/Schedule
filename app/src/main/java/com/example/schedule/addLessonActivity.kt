@@ -53,6 +53,7 @@ class addLessonActivity : AppCompatActivity() {
 
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                db.getLessonFirstWeek()
             }
         }
 

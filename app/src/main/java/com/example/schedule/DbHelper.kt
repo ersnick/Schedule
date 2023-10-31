@@ -34,4 +34,49 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
 
         db.close()
     }
+
+    fun getLessonFirstWeek(): ArrayList<Lesson>{
+        val db = this.readableDatabase
+        val lessons = arrayListOf<Lesson>()
+
+        val result = db.rawQuery("SELECT * FROM lessons WHERE numWeek = 'Первая'", null)
+        var stat = result.moveToFirst()
+        while (stat){
+            val ln = result.getString(result.getColumnIndex("lesName"))
+            val tn = result.getString(result.getColumnIndex("teachName"))
+            val cr = result.getString(result.getColumnIndex("clasRoom"))
+            val tl = result.getString(result.getColumnIndex("typeLess"))
+            val nw = result.getString(result.getColumnIndex("numWeek"))
+            val d = result.getString(result.getColumnIndex("day"))
+            val ts = result.getString(result.getColumnIndex("timeStart"))
+            val te = result.getString(result.getColumnIndex("timeEnd"))
+            lessons.add(Lesson(ln, tn, cr, tl, nw, d, ts, te))
+            stat = result.moveToNext()
+        }
+
+        return lessons
+    }
+
+    fun getLessonSecondWeek(): ArrayList<Lesson> {
+        val db = this.readableDatabase
+        val lessons = arrayListOf<Lesson>()
+
+
+        val result = db.rawQuery("SELECT * FROM lessons WHERE numWeek = 'Вторая'", null)
+        var stat = result.moveToFirst()
+        while (stat){
+            val ln = result.getString(result.getColumnIndex("lesName"))
+            val tn = result.getString(result.getColumnIndex("teachName"))
+            val cr = result.getString(result.getColumnIndex("clasRoom"))
+            val tl = result.getString(result.getColumnIndex("typeLess"))
+            val nw = result.getString(result.getColumnIndex("numWeek"))
+            val d = result.getString(result.getColumnIndex("day"))
+            val ts = result.getString(result.getColumnIndex("timeStart"))
+            val te = result.getString(result.getColumnIndex("timeEnd"))
+            lessons.add(Lesson(ln, tn, cr, tl, nw, d, ts, te))
+            stat = result.moveToNext()
+        }
+
+        return lessons
+    }
 }
