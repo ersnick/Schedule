@@ -4,12 +4,11 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import java.util.prefs.PreferencesFactory
 
 class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, "scheduleDb", factory, 1){
     override fun onCreate(db: SQLiteDatabase?) {
-        val query = "CREATE TABLE lessons (id INT PRIMARY KEY, lesName TEXT, teachName TEXT, clasRoom TEXT, typeLess TEXT, numWeek TEXT, day TEXT, timeStart TEXT, timeEnd TEXT)"
+        val query = "CREATE TABLE lessons (id INTEGER PRIMARY KEY AUTOINCREMENT DEFAULT NULL, lesName TEXT, teachName TEXT, clasRoom TEXT, typeLess TEXT, numWeek TEXT, day TEXT, timeStart TEXT, timeEnd TEXT)"
         db!!.execSQL(query)
     }
 
@@ -35,6 +34,30 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
         db.close()
     }
 
+    fun delLesson(lesson: Lesson){
+        val db = this.writableDatabase
+
+        val lessonName = lesson.lessonName
+        val teacherName = lesson.teacherName
+        val classroom = lesson.classroom
+        val lessonType = lesson.lessonType
+        val week = lesson.week
+        val day = lesson.day
+        val timeStart = lesson.timeStart
+        val timeEnd = lesson.timeEnd
+
+        val cursor = db.rawQuery("SELECT * FROM lessons WHERE lesName = '$lessonName' AND teachName = '$teacherName' AND clasRoom = '$classroom' AND typeLess = '$lessonType' AND numWeek = '$week' AND day = '$day' AND timeStart = '$timeStart' AND timeEnd = '$timeEnd'", null)
+        cursor.moveToFirst()
+
+        val id = cursor.getInt(cursor.getColumnIndex("id"))
+
+        val whereClause = "id=?"
+        val whereArgs = arrayOf<String>(id.toString())
+
+        db.delete("lessons", whereClause, whereArgs)
+        db.close()
+    }
+
     fun getLessonFirstWeek(): ArrayList<Lesson>{
         val db = this.readableDatabase
         val lessons = arrayListOf<Lesson>()
@@ -53,6 +76,7 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
             lessons.add(Lesson(ln, tn, cr, tl, nw, d, ts, te))
             stat = result.moveToNext()
         }
+        db.close()
 
         return lessons
     }
@@ -76,6 +100,7 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
             lessons.add(Lesson(ln, tn, cr, tl, nw, d, ts, te))
             stat = result.moveToNext()
         }
+        db.close()
 
         return lessons
     }

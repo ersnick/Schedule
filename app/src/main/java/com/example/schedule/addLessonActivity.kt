@@ -51,6 +51,8 @@ class addLessonActivity : AppCompatActivity() {
                 val db = DbHelper(this, null)
                 db.addLesson(lesson)
 
+                //TODO обработать вариант выбора "Первая и вторая"
+
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 db.getLessonFirstWeek()
