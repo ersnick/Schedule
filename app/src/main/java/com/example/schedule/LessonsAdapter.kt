@@ -14,7 +14,7 @@ import com.example.schedule.databinding.FragmentFirstWeekBinding
 import com.example.schedule.databinding.RemoveOrEditDialogBinding
 
 
-class LessonsAdapter(public var lessons: List<Lesson>, var context: Context):
+class LessonsAdapter(public var lessons: ArrayList<Lesson>, var context: Context):
     RecyclerView.Adapter<LessonsAdapter.MyViewHolder>() {
     //lateinit var binding: RemoveOrEditDialogBinding
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -54,11 +54,9 @@ class LessonsAdapter(public var lessons: List<Lesson>, var context: Context):
                 db.delLesson(lessons[position])
                 dialog.dismiss()
 
-                //Пытаюсь обновить фрагмент
-                //supportFragmentManager
-                //    .beginTransaction()
-                //    .replace(R.id.schedule, FirstWeekFragment.newInstance())
-                //    .commit()
+                this.notifyItemRemoved(position)
+
+                lessons.remove(lessons[position])
             }
 
             textEdit.setOnClickListener {
