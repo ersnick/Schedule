@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="addLesson_title">Добавить занятие</string>
+    <string name="editLesson_title">Редактировать занятие</string>
     <string-array name="typeOfLesson">
         <item>Выберите тип занятия</item>
         <item>Практика</item>

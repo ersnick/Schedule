@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivities
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schedule.databinding.ActivityMainBinding
 import com.example.schedule.databinding.FragmentFirstWeekBinding
@@ -16,7 +18,6 @@ import com.example.schedule.databinding.RemoveOrEditDialogBinding
 
 class LessonsAdapter(public var lessons: ArrayList<Lesson>, var context: Context):
     RecyclerView.Adapter<LessonsAdapter.MyViewHolder>() {
-    //lateinit var binding: RemoveOrEditDialogBinding
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view){
         val lessonDay: TextView = view.findViewById(R.id.lesson_list_day)
         val lessonTime: TextView = view.findViewById(R.id.lesson_list_time)
@@ -60,7 +61,18 @@ class LessonsAdapter(public var lessons: ArrayList<Lesson>, var context: Context
             }
 
             textEdit.setOnClickListener {
-                //TODO open edit activity
+                val intent = Intent(context, EditLessonActivity::class.java)
+                intent.putExtra("extra_lesson", lessons[position])
+                holder.itemView.context.startActivity(intent)
+
+                val db = DbHelper(context, null)
+                db.writableDatabase
+                db.delLesson(lessons[position])
+                dialog.dismiss()
+
+                this.notifyItemRemoved(position)
+
+                lessons.remove(lessons[position])
             }
         }
     }

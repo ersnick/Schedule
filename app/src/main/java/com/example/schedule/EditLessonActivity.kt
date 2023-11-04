@@ -3,6 +3,7 @@ package com.example.schedule
 import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
@@ -10,16 +11,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import java.util.Calendar
 
-class addLessonActivity : AppCompatActivity() {
+class EditLessonActivity : AppCompatActivity() {
     lateinit var lessonStartTime: Button
     lateinit var lessonEndTime: Button
     var dateAndTime = Calendar.getInstance()
-    public override fun onCreate(savedInstance: Bundle?) {
-        super.onCreate(savedInstance)
-        setContentView(R.layout.activity_add_lesson)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_edit_lesson)
+        val lesson = intent.extras?.get("extra_lesson") as Lesson
 
         val lessonName: EditText = findViewById(R.id.lesson_name)
         val teacherName: EditText = findViewById(R.id.teacher_name)
@@ -30,6 +31,39 @@ class addLessonActivity : AppCompatActivity() {
         lessonStartTime = findViewById(R.id.time_start)
         lessonEndTime = findViewById(R.id.time_end)
         val buttonDone: Button = findViewById(R.id.button_done)
+
+        lessonName.setText(lesson.lessonName)
+        teacherName.setText(lesson.teacherName)
+        classroom.setText(lesson.classroom)
+        if (lesson.lessonType == "Практика")
+            typeOfLesson.setSelection(1)
+        if (lesson.lessonType == "Лекция")
+            typeOfLesson.setSelection(2)
+        if (lesson.lessonType == "Лабораторная")
+            typeOfLesson.setSelection(3)
+        if (lesson.week == "Первая")
+            numberOfWeek.setSelection(1)
+        if (lesson.week == "Вторая")
+            numberOfWeek.setSelection(2)
+        if (lesson.week == "Первая и вторая")
+            numberOfWeek.setSelection(3)
+        if (lesson.day == "Понедельник")
+            dayLesson.setSelection(1)
+        if (lesson.day == "Вторник")
+            dayLesson.setSelection(2)
+        if (lesson.day == "Среда")
+            dayLesson.setSelection(3)
+        if (lesson.day == "Четверг")
+            dayLesson.setSelection(4)
+        if (lesson.day == "Пятница")
+            dayLesson.setSelection(5)
+        if (lesson.day == "Суббота")
+            dayLesson.setSelection(6)
+        if (lesson.day == "Воскресенье")
+            dayLesson.setSelection(7)
+
+        lessonStartTime.setText(lesson.timeStart)
+        lessonEndTime.setText(lesson.timeEnd)
 
         buttonDone.setOnClickListener {
             val lesName = lessonName.text.toString().trim()
@@ -79,7 +113,7 @@ class addLessonActivity : AppCompatActivity() {
     // отображаем диалоговое окно для выбора времени
     fun setTime(v: View?) {
         TimePickerDialog(
-            this@addLessonActivity, t,
+            this@EditLessonActivity, t,
             dateAndTime[Calendar.HOUR_OF_DAY],
             dateAndTime[Calendar.MINUTE], true
         )
@@ -104,7 +138,7 @@ class addLessonActivity : AppCompatActivity() {
 
     fun setTime2(v: View?) {
         TimePickerDialog(
-            this@addLessonActivity, t2,
+            this@EditLessonActivity, t2,
             dateAndTime[Calendar.HOUR_OF_DAY],
             dateAndTime[Calendar.MINUTE], true
         )
